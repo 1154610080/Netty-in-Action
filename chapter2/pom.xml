@@ -17,6 +17,8 @@
 
     <artifactId>chapter2</artifactId>
 
-
-    
+    <properties>
+        <server.hostname>localhost</server.hostname>
+        <server.port>2333</server.port>
+    </properties>
 </project>

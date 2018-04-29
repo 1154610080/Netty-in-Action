@@ -1,3 +1,5 @@
+package nia.chapter2.client;
+
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;

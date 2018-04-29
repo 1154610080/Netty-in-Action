@@ -1,3 +1,5 @@
+package nia.chapter2.server;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -47,8 +49,10 @@ public class EchoServer {
                     });
             //异步绑定服务器，调用sync阻塞当前线程直到绑定完成
             ChannelFuture f = b.bind().sync();
+            System.out.println(EchoServer.class.getName() +
+                    " started and listening for connections on " + f.channel().localAddress());
             //获取Chanel的FutureClose，同样调用sync直到它完成
-            f.channel().close().sync();
+            f.channel().closeFuture().sync();
         }finally{
             //关闭EventLoopGroup，并释放所有资源
             group.shutdownGracefully().sync();
@@ -62,11 +66,12 @@ public class EchoServer {
             System.err.println(
                     "Usage" + EchoServer.class.getSimpleName() + "<port>"
             );
+            return;
         }
 
         //否则设置端口值
         int port = Integer.parseInt(args[0]);
-        //调用start方法
+        //调用start方法;
         new EchoServer(port).start();
     }
 

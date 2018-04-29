@@ -1,3 +1,5 @@
+package nia.chapter2.server;
+
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.ChannelFutureListener;
@@ -28,7 +30,6 @@ public class EchoServerHandler extends ChannelInboundHandlerAdapter {
     @Override
     public void channelReadComplete(ChannelHandlerContext ctx)
             throws Exception {
-
         //将未决消息冲刷到远程节点，并关闭连接
         ctx.writeAndFlush(Unpooled.EMPTY_BUFFER).
                 addListener(ChannelFutureListener.CLOSE);
