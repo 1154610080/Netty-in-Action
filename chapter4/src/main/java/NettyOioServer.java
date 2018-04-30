@@ -42,7 +42,7 @@ public class NettyOioServer {
             ChannelFuture f = bootstrap.bind().sync();
             f.channel().closeFuture().sync();
         }finally {
-            group.shutdownGracefully();
+            group.shutdownGracefully().sync();
         }
     }
 
