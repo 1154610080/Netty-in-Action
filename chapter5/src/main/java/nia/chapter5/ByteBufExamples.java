@@ -1,6 +1,7 @@
 package nia.chapter5;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufProcessor;
 import io.netty.buffer.CompositeByteBuf;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.Channel;
@@ -165,6 +166,19 @@ public class ByteBufExamples {
         while (buf.readableBytes() >= 4){
             System.out.println(buf.readInt());
         }
+    }
+
+
+    /*
+     * 使用ByteBufProcessor查找\r
+     *
+     * @date 2018/5/2 22:01
+     * @param []
+     * @return void
+     */
+    public static void byteBufProcessor(){
+        ByteBuf buf = BYTE_BUF_FROM_SOMEWHERE;
+        int index = buf.forEachByte(ByteBufProcessor.FIND_CR);
     }
 
     public static void handleBuff(byte[] buff, int offset, int len){}
