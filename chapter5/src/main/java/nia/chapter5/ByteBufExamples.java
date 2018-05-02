@@ -17,7 +17,7 @@ import java.util.Random;
  **/
 public class ByteBufExamples {
     final static Random random = new Random();
-    final static ByteBuf BYTE_BUF_FROM_SOMEWHERE = Unpooled.buffer(1024);
+    final static ByteBuf BYTE_BUF_FROM_SOMEWHERE = Unpooled.copiedBuffer("abcdefg".getBytes());//Unpooled.buffer(1024);
     final static Channel CHANNEL_FROM_SOMEWHERE = new NioSocketChannel();
 
     /*
@@ -104,7 +104,6 @@ public class ByteBufExamples {
             System.out.println(buf.toString());
         }
 
-
     }
 
 
@@ -122,6 +121,55 @@ public class ByteBufExamples {
         handleBuff(array, 0, len);
     }
 
+    /*
+     * 随机访问数据
+     *
+     * @date 2018/5/2 13:37
+     * @param []
+     * @return void
+     */
+    public static void byteBufRelativeAccess(){
+        ByteBuf buf = BYTE_BUF_FROM_SOMEWHERE;
+        for(int i=0; i<buf.capacity(); i++){
+            byte b = buf.getByte(i);
+            System.out.println((char)b);
+        }
+    }
+
+    /*
+     * 读取所有数据
+     *
+     * @date 2018/5/2 13:39
+     * @param []
+     * @return void
+     */
+    public static void readAllData(){
+        ByteBuf buf = BYTE_BUF_FROM_SOMEWHERE;
+        while (buf.isReadable()){
+            System.out.println((char)buf.readByte());
+        }
+    }
+
+    /*
+     * 写数据
+     *
+     * @date 2018/5/2 13:47
+     * @param []
+     * @return void
+     */
+    public static void writeData(){
+        ByteBuf buf = BYTE_BUF_FROM_SOMEWHERE;
+        while (buf.writableBytes() >= 4){
+            buf.writeInt(random.nextInt());
+        }
+        while (buf.readableBytes() >= 4){
+            System.out.println(buf.readInt());
+        }
+    }
 
     public static void handleBuff(byte[] buff, int offset, int len){}
+
+    public static void main(String[] args) {
+        writeData();
+    }
 }
