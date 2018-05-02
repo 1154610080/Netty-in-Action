@@ -8,6 +8,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.Charset;
 import java.util.Random;
 
 /*
@@ -170,7 +171,7 @@ public class ByteBufExamples {
 
 
     /*
-     * 使用ByteBufProcessor查找\r
+     * 使用ByteBufProcessor查找\r(已废弃)
      *
      * @date 2018/5/2 22:01
      * @param []
@@ -181,9 +182,27 @@ public class ByteBufExamples {
         int index = buf.forEachByte(ByteBufProcessor.FIND_CR);
     }
 
+    /*
+     * 使用slice切片
+     *
+     * @date 2018/5/2 22:14
+     * @param []
+     * @return void
+     */
+    public static void bytBufSlice(){
+        Charset utf8 = Charset.forName("UTF-8");
+        ByteBuf buf = Unpooled.copiedBuffer("Netty in action rocked!", utf8);
+        //切片
+        ByteBuf slice = buf.slice(0, 15);
+        System.out.println(slice.toString(utf8));
+        //修改索引0的字节
+        slice.setByte(0, (byte)'J');
+        assert buf.getByte(0) == slice.getByte(0);
+    }
+
     public static void handleBuff(byte[] buff, int offset, int len){}
 
     public static void main(String[] args) {
-        writeData();
+        bytBufSlice();
     }
 }
