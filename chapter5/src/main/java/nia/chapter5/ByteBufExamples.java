@@ -1,12 +1,9 @@
 package nia.chapter5;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufProcessor;
-import io.netty.buffer.CompositeByteBuf;
-import io.netty.buffer.Unpooled;
+import io.netty.buffer.*;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.socket.nio.NioSocketChannel;
-
 import java.nio.ByteBuffer;
 import java.nio.charset.Charset;
 import java.util.Random;
@@ -21,6 +18,8 @@ public class ByteBufExamples {
     final static Random random = new Random();
     final static ByteBuf BYTE_BUF_FROM_SOMEWHERE = Unpooled.copiedBuffer("abcdefg".getBytes());//Unpooled.buffer(1024);
     final static Channel CHANNEL_FROM_SOMEWHERE = new NioSocketChannel();
+    private static final ChannelHandlerContext CHANNEL_HANDLER_CONTEXT_FROM_SOMEWHERE = null;
+
 
     /*
      * 支撑数组(backing array)模式
