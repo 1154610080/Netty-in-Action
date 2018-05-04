@@ -1,5 +1,6 @@
 package nia.chapter6;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.util.ReferenceCountUtil;
@@ -10,6 +11,7 @@ import io.netty.util.ReferenceCountUtil;
  * @Author Egan
  * @Date 2018/5/4
  **/
+@ChannelHandler.Sharable
 public class DiscardHandler extends ChannelInboundHandlerAdapter {
 
     @Override
