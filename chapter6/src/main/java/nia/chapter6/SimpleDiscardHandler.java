@@ -1,5 +1,6 @@
 package nia.chapter6;
 
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -9,6 +10,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
  * @Author Egan
  * @Date 2018/5/4
  **/
+@ChannelHandler.Sharable
 public class SimpleDiscardHandler extends SimpleChannelInboundHandler<Object> {
 
     @Override
